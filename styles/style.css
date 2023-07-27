@@ -146,12 +146,12 @@ main .project {
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    width: 1300px;
+    max-width: 1300px;
     padding: 150px 0;
 }
 main .project a {
     background: url(../images/web.png) no-repeat center;
-    background-size: cover;
+    background-size: auto 100%;
     border-radius: 100px 100px 0 0;
     height: 350px;
     margin: 7px;
@@ -160,12 +160,12 @@ main .project a {
     transition: all 0.3s;
 }
 main .project a:hover {
-    background-size: 150%; box-shadow: 5px 5px 10px rgba(0,0,0,0.8);
+    background-size: auto 120%; 
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.8);
 }
 main .project a .desc {
     background: #fff;
     padding: 20px;
-    height: 120px;
     width: 100%;
     display: flex;
     flex-flow: column nowrap;
@@ -181,6 +181,9 @@ main .project a .desc em {
 }
 main .project a .desc span {
     letter-spacing: -0.02em;
+}
+main .project a .desc span:nth-child(2) {
+    margin: 10px 0;
 }
 /* footer */
 footer {
