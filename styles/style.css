@@ -1,6 +1,7 @@
 body {
     background: url(../images/7598163.jpg) no-repeat fixed center;
     background-size: cover;
+    overflow-x: hidden;
 }
 main .info, main .mid .close, main .contents_wrap,footer {
     width: calc(100% - 180px);
@@ -11,14 +12,22 @@ main .info, main .mid .close, main .contents_wrap,footer {
 .scroll span {}
 /* main */
 main {}
-main .info {
+main .top {
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content:space-between;
+    align-items: center;
+    height: 1000px;
+}
+main .top .info {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
-main .info .profile_img {
+main .top .info .profile_img {
     background: url(../images/profile.jpg) no-repeat center;
     background-size: cover;
     width: 200px; height: 200px;
@@ -26,9 +35,7 @@ main .info .profile_img {
     border: 5px solid white;
     animation: profile 1.5s linear alternate infinite;
 }
-main .info .profile_img:hover ~ .roading_bar {}
-main .info .profile_img:hover ~ .roading_bar span {}
-main .info h1 {
+main .top .info h1 {
     margin-top: 20px;
     font-family: 'Lobster', cursive;
     font-size: 2rem;
@@ -39,18 +46,30 @@ main .info h1 {
     background-size: 200%;
     animation: gradient 10s linear alternate infinite;
 }
-main .info p {
+main .top .info p {
     font-weight: 700;
     margin: 20px 0;
     letter-spacing: -0.02em;
 }
-main .info .roading_bar {
+main .top .info .loading_bar {
     width: 300px; height: 10px;
     border-radius: 5px;
     background: white;
+    overflow: hidden;
 }
-main .info p:nth-child(4) {margin-bottom: 0;}
-main .info .sns {
+main .top .info .loading_bar span {
+    display: block;
+    width: 300px; height: 10px;
+    transform: scaleX(0);
+    transition: all 3s;
+    transform-origin: left top;
+    background: #ff00ff;
+}
+main .top .info .profile_img:hover ~ .loading_bar span {
+    transform: scaleX(1);
+}
+main .top .info p:nth-child(4) {margin-bottom: 0;}
+main .top .info .sns {
     padding: 30px 0;
     display: flex;
     flex-flow: row nowrap;
@@ -58,17 +77,16 @@ main .info .sns {
     align-items: center;
     width: 115px;
 }
-main .info .sns a {
+main .top .info .sns a {
     width: 25px; 
     height: 25px;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    margin-right: 20px;
 }
-main .info .sns a:last-child {margin-right: 0;}
-main .info .sns a img {width: 100%;}
-main .info .sns a .text {
+main .top .info .sns a:last-child {}
+main .top .info .sns a img {width: 100%;}
+main .top .info .sns a .text {
     margin-top: 10px;
     padding: 5px;
     background: #222;
@@ -76,38 +94,42 @@ main .info .sns a .text {
     letter-spacing: -0.02em;
     color: white;
     display: none;
-    transition: all 0.1s linear both;
 }
-main .info .sns a:hover > .text {
+main .top .info .sns a:hover .text {
     display: block;
 }
-main .close {
+main .top .close {
     margin: 0 auto;
     width: 30px; height: 25px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
+    position: absolute;
+    bottom: 0;
 }
-main .close:hover span:nth-child(1) {
-    transform:rotate(45deg) translate(6px,8px);
+main .top .close:hover span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
 }
-main .close:hover span:nth-child(2) {opacity: 0;}
-main .close:hover span:nth-child(3) {
-    transform:rotate(-45deg) translate(6px,-8px)
+main .top .close:hover span:nth-child(2) {opacity: 0;}
+main .top .close:hover span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
 }
-main .close span {
+main .top .close span {
     width: 100%; height: 5px;
     border-radius: 2.5px;
     background: #000;
     transition: all 0.3s;
 }
-main .text_bg {width: 400px;}
+main .text_bg {
+    margin-top: 300px;
+    height: 10vh;
+}
 main .text_bg span:first-child {
     background: url(../images/bg2.png) repeat-x left top;
     width: 150%; height: 200px;
     position: absolute;
     animation: text_bg 10s linear alternate-reverse infinite;
-    transform: rotate(-10deg) translateX(-100px);
+    transform: rotate(-10deg) translate(-100px,-200px);
     z-index: 100;
 }
 main .text_bg span:last-child {
@@ -115,7 +137,7 @@ main .text_bg span:last-child {
     width: 150%; height: 200px;
     position: absolute;
     animation: text_bg 10s linear infinite;
-    transform: rotate(10deg) translateX(-100px);
+    transform: rotate(10deg) translate(-100px,0);
     z-index: 200;
 }
 main .project {
@@ -128,15 +150,18 @@ main .project {
     padding: 150px 0;
 }
 main .project a {
-    background: url(../images/bg.jpg) no-repeat center;
+    background: url(../images/web.png) no-repeat center;
     background-size: cover;
     border-radius: 100px 100px 0 0;
     height: 350px;
     margin: 7px;
     width: 100%;
     position: relative;
+    transition: all 0.3s;
 }
-main .project a:hover {}
+main .project a:hover {
+    background-size: 150%; box-shadow: 5px 5px 10px rgba(0,0,0,0.8);
+}
 main .project a .desc {
     background: #fff;
     padding: 20px;
@@ -164,8 +189,10 @@ footer {
 }
 footer p {
     color: #fff;
-    text-shadow: 0 0 3px #333;
+    font-size: 32px;
+    text-shadow: 0 0 4px #333;
 }
+footer p:first-child {margin-bottom: 20px;}
 /* animation */
 @keyframes profile {
     0% {transform: translateY(0);}
@@ -182,4 +209,8 @@ footer p {
 @keyframes text_bg {
     0% {background-position: 0,0;}
     100% {background-position: 1000px,0;}
+}
+@keyframes project {
+    0% {background-size: 130%; box-shadow: 0 0 0 0;}
+    100% {background-size: 150%; box-shadow: 5px 5px 10px rgba(0,0,0,0.8);}
 }
